@@ -1,13 +1,8 @@
 #pragma once
 #include <iostream>
+#include "node.h"
 using namespace std;
-struct Node{
-    int data;
-    Node* next;
-    Node(int _data): data(_data) , next(nullptr){}
-    Node() : next(nullptr) {}
 
-};
 struct LinkedList{
     Node* head;
     Node* tail;
