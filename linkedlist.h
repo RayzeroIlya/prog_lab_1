@@ -56,7 +56,7 @@ struct LinkedList{
     }
     void LDEL(const int& _data){
         if (head==nullptr) return;
-        if(head==tail){
+        if(head==tail && head->data==_data){
             LDELHEAD();
             return;
         }else if (tail->data==_data){
