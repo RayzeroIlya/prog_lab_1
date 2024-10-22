@@ -6,8 +6,5 @@ using namespace std;
 #include "queue.h"
 #include "stack.h"
 int main(){
-    Stack* stack=new Stack;
-    stack->SPUSH(10);
-    stack->SPUSH(12);
 
 }
