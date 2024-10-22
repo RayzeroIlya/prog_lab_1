@@ -7,12 +7,14 @@ struct QUEUE{
     Node* first;
     Node* last;
     QUEUE() : first(nullptr),last(nullptr){}
-    Node* QPOP() {
-        if (first==nullptr) return;
-        Node* temp=first;
+    int QPOP() {
+        if (first==nullptr) return NULL;
+        Node* fNode=first;
+        int temp=fNode->data;
         first=first->next;
         if(first==nullptr) last=nullptr; 
-        return temp ;
+        delete fNode;
+        return temp;
     }
     void QPUSH(const int& _data) {
         Node* newNode=new Node(_data);
@@ -22,5 +24,7 @@ struct QUEUE{
         last->next=newNode;
         last=newNode;
     }
-
+    int QPEEK(){
+        return first->data;
+    }
 };

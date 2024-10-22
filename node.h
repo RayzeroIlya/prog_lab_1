@@ -5,6 +5,5 @@ struct Node{
     int data;
     Node* next;
     Node(int _data): data(_data) , next(nullptr){}
-    Node() : next(nullptr) {}
 
 };
