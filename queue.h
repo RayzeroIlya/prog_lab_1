@@ -8,13 +8,14 @@ struct QUEUE{
     Node* last;
     QUEUE() : first(nullptr),last(nullptr){}
     int QPOP() {
-        if (first==nullptr) return NULL;
+        if (first==nullptr) throw "Queue is empty";
         Node* fNode=first;
         int temp=fNode->data;
         first=first->next;
         if(first==nullptr) last=nullptr; 
         delete fNode;
         return temp;
+        //return fNode; //удалять после вывода когда понадобился.
     }
     void QPUSH(const int& _data) {
         Node* newNode=new Node(_data);

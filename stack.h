@@ -15,6 +15,7 @@ struct Stack{
     return;
     }
     int SPOP(){
+        if (first == nullptr) throw "Stack is empty";
         Node* fNode=first;
         int temp=fNode->data;
         first=first->next;
