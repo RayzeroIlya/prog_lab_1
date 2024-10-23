@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 using namespace std;
+template <typename T>
 struct Node{
-    int data;
-    Node* next;
-    Node(int _data): data(_data) , next(nullptr){}
+    T data;
+    Node<T>* next;
+    Node(T _data): data(_data) , next(nullptr){}
 
 };

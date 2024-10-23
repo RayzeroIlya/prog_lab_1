@@ -2,14 +2,14 @@
 #include <iostream>
 #include "node.h"
 using namespace std;
-
+template <typename T>
 struct QUEUE{
-    Node* first;
-    Node* last;
+    Node<T>* first;
+    Node<T>* last;
     QUEUE() : first(nullptr),last(nullptr){}
     int QPOP() {
         if (first==nullptr) throw "Queue is empty";
-        Node* fNode=first;
+        Node<T>* fNode=first;
         int temp=fNode->data;
         first=first->next;
         if(first==nullptr) last=nullptr; 
@@ -18,14 +18,14 @@ struct QUEUE{
         //return fNode; //удалять после вывода когда понадобился.
     }
     void QPUSH(const int& _data) {
-        Node* newNode=new Node(_data);
+        Node<T>* newNode=new Node(_data);
         if (first == nullptr){
             first=last=newNode;
         }
         last->next=newNode;
         last=newNode;
     }
-    int QPEEK(){
+    T QPEEK(){
         return first->data;
     }
 };

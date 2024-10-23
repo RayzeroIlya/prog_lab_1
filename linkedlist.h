@@ -2,26 +2,26 @@
 #include <iostream>
 #include "node.h"
 using namespace std;
-
+template <typename T>
 struct LinkedList{
-    Node* head;
-    Node* tail;
+    Node<T>* head;
+    Node<T>* tail;
     LinkedList(): head(nullptr){}
 
     void LINSERT(const int& data){
-        Node* newNode = new Node(data);
+        Node<T>* newNode = new Node(data);
         if (head == nullptr){
             head = newNode;
             tail= newNode;
             return;
         }
-        Node* temp=head;
+        newNode->next=head;
         head=newNode;
-        head->next=temp;
+    
         return;
     }
     void LPUSH(const int& _data) {
-        Node* newNode = new Node(_data);
+        Node<T>* newNode = new Node(_data);
                 if (head == nullptr){
             head = newNode;
             tail= newNode;
@@ -33,7 +33,7 @@ struct LinkedList{
     }
     void LDELHEAD(){
             if (head == nullptr) return;
-            Node *temp=head;
+            Node<T> *temp=head;
             head=temp->next;
             delete temp;
     }
@@ -43,7 +43,7 @@ struct LinkedList{
             LDELHEAD();
             return;
         }
-        Node* temp=head;
+        Node<T>* temp=head;
         while (temp->next!=tail) temp=temp->next;
         temp->next=nullptr;
         delete tail;
@@ -58,8 +58,8 @@ struct LinkedList{
             LDELTAIL();
             return;
         }
-    Node* one=head;
-    Node* two = head->next;
+    Node<T>* one=head;
+    Node<T>* two = head->next;
     while (two && two->data!=_data) { //идем пока two есть и его дата не равна искомой
         one=one->next;
         two=two->next;
@@ -71,8 +71,8 @@ struct LinkedList{
     one->next=two->next;
     delete two;
     }
-    Node* LFIND(const int& _data){
-        Node* temp=head;
+    Node<T>* LFIND(const int& _data){
+        Node<T>* temp=head;
         while (temp && temp->data!=_data) temp=temp->next;
         return (temp&&temp->data==_data) ? temp : nullptr; //Если нода есть и дата равна искомой
 
