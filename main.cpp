@@ -5,6 +5,7 @@ using namespace std;
 #include "doublelinkedlist.h"
 #include "queue.h"
 #include "stack.h"
+#include "hashtable.h"
 int main(){
 
 }

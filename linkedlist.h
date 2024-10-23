@@ -6,7 +6,7 @@ template <typename T>
 struct LinkedList{
     Node<T>* head;
     Node<T>* tail;
-    LinkedList(): head(nullptr){}
+    LinkedList<T>(): head(nullptr), tail(nullptr){}
 
     void LINSERT(const int& data){
         Node<T>* newNode = new Node(data);
