@@ -17,7 +17,7 @@ struct Stack{
     T SPOP(){
         if (first == nullptr) throw "Stack is empty";
         Node<T>* fNode=first;
-        int temp=fNode->data;
+        T temp=fNode->data;
         first=first->next;
         delete fNode;
         return temp;

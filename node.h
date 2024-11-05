@@ -9,11 +9,3 @@ struct Node{
     Node(T _data): data(_data) , next(nullptr){}
 
 };
-template <typename Key, typename Value>
-struct HNode{
-    Key key;
-    Value value;
-    HNode* next;
-    HNode(const Key& _key, const Value& _value) :  key(_key), value(_value), next(nullptr) {}
-
-};

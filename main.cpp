@@ -2,13 +2,13 @@
 #include <string>
 #include <fstream>
 using namespace std;
-#include "structures.h"
 #include "Mactions.h"
 #include "SLLactions.h"
 #include "Qactions.h"
 #include "HTactions.h"
 #include "Sactions.h"
 int main(int argc, char** argv){
+    
    cout <<argv[0]<<endl;
     string token=argv[1];
     if (token!="--file") {
@@ -32,8 +32,7 @@ int main(int argc, char** argv){
     || action == "MAT" || action == "MSIZE") Mactions(argv[2],token);
 
     if (action == "SLINIT" || action == "SLINSERT" || action == "SLPUSH"
-    || action == "SLDELHEAD" || action == "SLDELTAIL" || action=="SELDEL"
-    || action = "SLFIND" ) SLLactions(argv[2],token);
+    || action == "SLDELHEAD" || action == "SLDELTAIL" || action=="SELDEL" || action == "SLFIND" ) SLLactions(argv[2],token);
 
     if (action == "SINIT" || action == "SPUSH"
      || action == "SPOP") Sactions(argv[2],token);
@@ -41,9 +40,11 @@ int main(int argc, char** argv){
     if (action=="QINIT" || action == "QPUSH" 
     || action == "QPOP") Qactions(argv[2],token);
 
-    if (action == "HINIT" || action =="HINSERT" || action ==)
+    if (action == "HINIT" || action =="HINSERT" || action =="HGET"
+    || action == "HREMOVE") HTactions(argv[2],token);
 
-  HTactions("htables.data","HINIT mg 2");
+
+
 }
 
 
