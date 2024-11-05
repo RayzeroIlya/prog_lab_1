@@ -28,7 +28,7 @@ struct Array{
       size++;
     }
 
-    int AT(const int& index){
+    int MAT(const int& index){
         if (index < 0 || index>size){
             cout << "Неверный индекс." << endl;
             return -1;
@@ -53,12 +53,11 @@ struct Array{
         arr=newArr;
         size--;
     }
-    int SIZE() {
+    int MSIZE() {
         return size;
     }
     void MGET(const string& file_name, const string& con_name){
-        fstream fin(file_name);
-        
+        ifstream fin(file_name, ios_base::in);       
         string row;
         while (getline(fin,row)){
             stringstream ss(row);
@@ -66,14 +65,14 @@ struct Array{
             getline(ss,val,' ');
             if( val== con_name) {
                 while (getline(ss,val,' ')) {
-                    size++;
-                    arr[size-1]=stoi(val);
+                    MPUSH(stoi(val));
                  }
                  fin.close();
                  return;
             }
         }
-        fin.close();
+       fin.close();
+       throw runtime_error("Array doesnt exist");
     }
     void MOUT(const string& file_name, const string& con_name){
         ifstream fin(file_name);
@@ -103,5 +102,8 @@ struct Array{
         for (int i =0;i<size;i++) arr.arr[i]=0;
         return arr;
     }
-
+    int& operator[](const int& index){
+        if (index < 0 || index >=size) throw range_error("Invalid index");
+        return arr[index];
+    }
 };
