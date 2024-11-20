@@ -52,4 +52,9 @@ void Mactions(const string& file_name,const string& query) {
     if (action== "MSIZE"){
         cout << arr.MSIZE()<<endl;
     }
+    if (action=="MDELETEAT"){
+        getline (ss,token ,' ');
+        arr.MDELETEAT(stoi(token));
+        arr.MOUT(file_name,con_name);
+    }
 }

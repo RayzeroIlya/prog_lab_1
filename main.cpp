@@ -27,7 +27,7 @@ int main(int argc, char** argv){
     getline(ss,action,' ');
 
     if (action == "MINIT" || action == "MINSERT" || action == "MPUSH"
-    || action == "MAT" || action == "MSIZE") Mactions(argv[2],token);
+    || action == "MAT" || action == "MSIZE" || action == "MDELETEAT") Mactions(argv[2],token);
 
     if (action == "SLINIT" || action == "SLINSERT" || action == "SLPUSH"
     || action == "SLDELHEAD" || action == "SLDELTAIL" || action=="SELDEL" || action == "SLFIND" ) SLLactions(argv[2],token);
@@ -61,7 +61,7 @@ int main(int argc, char** argv){
     
 
 
-
+   // Mactions("arrays.data", "MINIT myArr 5");
 
 }
 

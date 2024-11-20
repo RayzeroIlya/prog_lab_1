@@ -35,14 +35,22 @@ void HTactions(const string& file_name,const string& query) {
     }
     if (action == "HREMOVE"){
         getline(ss,token,' ');
+        try{
         hTable.HREMOVE((token));
         hTable.saveToFile(con_name+"|"+file_name);
-        return;
+        return;}
+        catch(exception& ex) {
+            cerr <<ex.what() <<endl;
+        }
     }
     if (action =="HGET"){
         getline(ss,token,' ');
-        cout << "Getted value -> " <<hTable.HGET(token);
-        return;
+        try{
+        cout << "Getted value -> " <<hTable.HGET(token)<<endl;
+        return;}
+        catch(exception& ex) {
+            cerr << ex.what() << endl;
+        }
     }
 
 }

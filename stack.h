@@ -7,11 +7,7 @@ struct Stack{
     Node<T>* first;
 
     Stack() : first(nullptr){}
-    ~Stack() { 
-        while (first) { 
-            SPOP(); // Освобождаем память, удаляя все узлы 
-        } 
-    }
+
     void SPUSH(const T& _data) {
         Node<T>* newNode = new Node(_data);
         newNode->next=first;

@@ -7,11 +7,7 @@ struct LinkedList{
     Node<T>* head;
     Node<T>* tail;
     LinkedList<T>(): head(nullptr), tail(nullptr){}
-    ~LinkedList() { 
-        while (head) { 
-            SLDELHEAD(); 
-        } 
-    }
+
     void SLINSERT(const T& data){
         Node<T>* newNode = new Node(data);
         if (head == nullptr){

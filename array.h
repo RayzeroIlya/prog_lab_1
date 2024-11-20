@@ -9,9 +9,7 @@ using namespace std;
 struct Array{
     string* arr;
     int size;
-    ~Array() { 
-        delete[] arr; 
-    }
+
 
     void MINSERT (const int& index, const string& value){
                 if (index < 0 || index > size) {
