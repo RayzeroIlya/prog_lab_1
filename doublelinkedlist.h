@@ -3,10 +3,10 @@
 using namespace std;
 
 struct DNode{
-    int data;
+    string data;
     DNode* next;
     DNode* prev;
-    DNode (const int& _data) : data(_data), next(nullptr),prev(nullptr){}
+    DNode (const string& _data) : data(_data), next(nullptr),prev(nullptr){}
 };
 
 struct DLinkedList{
@@ -15,7 +15,7 @@ struct DLinkedList{
 
     DLinkedList():head(nullptr),tail(nullptr){}
 
-    void DLINSERT(const int& _data){
+    void DLINSERT(const string& _data){
     DNode* newNode= new DNode(_data);
     if(head==nullptr){
         head=newNode;
@@ -26,7 +26,7 @@ struct DLinkedList{
     head=newNode;
 
     }
-    void DLPUSH(const int& _data){
+    void DLPUSH(const string& _data){
     DNode* newNode= new DNode(_data);
     if(head==nullptr){
         head=newNode;
@@ -54,7 +54,7 @@ struct DLinkedList{
         delete temp;
         return;
     }
-    void DLDEL(const int& _data){
+    void DLDEL(const string& _data){
         if (head==nullptr) return;
         if (head && head->data==_data) {
             DLDELHEAD();
@@ -77,7 +77,7 @@ struct DLinkedList{
         one->next->prev=one;        
         delete two;
         }
-    DNode* DLFIND(const int& _data){
+    DNode* DLFIND(const string& _data){
         DNode* temp=head;
         while (temp && temp->data!=_data) temp=temp->next;
         return (temp&&temp->data==_data) ? temp : nullptr; //Если нода есть и дата равна искомой

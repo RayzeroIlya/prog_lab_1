@@ -5,6 +5,8 @@ using namespace std;
 #include "structures.h"
 
 void Qactions(const string& file_name,const string& query) {
+    ofstream fout(file_name, ios_base::app);
+    fout.close();
     stringstream ss(query);
     string token;
     string action;

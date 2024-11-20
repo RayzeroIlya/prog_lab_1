@@ -7,11 +7,11 @@ using namespace std;
 
 
 struct Array{
-    int* arr;
+    string* arr;
     int size;
 
 
-    void MINSERT (const int& index, const int& value){
+    void MINSERT (const int& index, const string& value){
                 if (index < 0 || index > size) {
             cout << "Неверный индекс." << endl;
             return;
@@ -19,8 +19,8 @@ struct Array{
       arr[index]=value;
 
     }
-    void MPUSH(const int& value) {
-      int*  newArr=new int[size+1];
+    void MPUSH(const string& value) {
+      string*  newArr=new string[size+1];
       for (int i =0;i<size;i++) newArr[i]=arr[i];
       newArr[size]=value;
       delete[] arr;
@@ -28,10 +28,10 @@ struct Array{
       size++;
     }
 
-    int MAT(const int& index){
+    string MAT(const int& index){
         if (index < 0 || index>size){
             cout << "Неверный индекс." << endl;
-            return -1;
+            return "-1";
         }
         return arr[index];
 
@@ -42,7 +42,7 @@ struct Array{
             cout << "Неверный индекс." << endl;
             return;
         }
-        int* newArr=new int[size-1];
+        string* newArr=new string[size-1];
         for (int i =0;i<index;i++) {
             newArr[i]=arr[i];
         }
@@ -65,7 +65,7 @@ struct Array{
             getline(ss,val,' ');
             if( val== con_name) {
                 while (getline(ss,val,' ')) {
-                    MPUSH(stoi(val));
+                    MPUSH(val);
                  }
                  fin.close();
                  return;
@@ -98,11 +98,11 @@ struct Array{
         ofstream fout (file_name, ios_base::app);
         Array arr;
         arr.size=size;
-        arr.arr=new int[size];
-        for (int i =0;i<size;i++) arr.arr[i]=0;
+        arr.arr=new string[size];
+        for (int i =0;i<size;i++) arr.arr[i]=" ";
         return arr;
     }
-    int& operator[](const int& index){
+    string& operator[](const int& index){
         if (index < 0 || index >=size) throw range_error("Invalid index");
         return arr[index];
     }

@@ -29,20 +29,29 @@ struct HashTable {
     } 
  
     // Добавление элемента 
-    void HINSERT(const Key& key, const Value& value) { 
+    void HINSERT(const Key& key, const Value& value) {     
         int index = hash(key); 
-        HNode<Key, Value>* newNode = new HNode<Key, Value>(key, value); 
+        HNode<Key,Value>* newNode;
+        try{newNode =HGET(key);
+        cout << "Key exist"<<endl;
+            return;
+        }
+        catch (exception& ex) {
+        newNode = new HNode<Key, Value>(key, value); 
         newNode->next = table[index]; 
         table[index] = newNode; 
+        return;
+        }
+
     } 
  
     // Получение значения по ключу 
-    Value HGET(const Key& key) { 
+    HNode<Key,Value>* HGET(const Key& key) { 
         int index = hash(key); 
         HNode<Key, Value>* current = table[index]; 
         while (current != nullptr) { 
             if (current->key == key) { 
-                return current->value; 
+                return current;
             } 
             current = current->next; 
         } 
@@ -81,9 +90,10 @@ struct HashTable {
         for (int i = 0; i < size; i++) { 
             HNode<Key, Value>* current = table[i]; 
             while (current != nullptr) { 
-                file << current->key << " " << current->value << std::endl; 
+                file << current->key << " " << current->value << " "; 
                 current = current->next; 
-            } 
+            }
+            file << endl; 
         } 
         file.close(); 
     } 

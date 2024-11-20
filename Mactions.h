@@ -5,6 +5,8 @@ using namespace std;
 #include "structures.h"
 
 void Mactions(const string& file_name,const string& query) {
+    ofstream fout(file_name, ios_base::app);
+    fout.close();
     stringstream ss(query);
     string token;
     string action;
@@ -12,7 +14,7 @@ void Mactions(const string& file_name,const string& query) {
     action=token;
         Array arr;
         arr.size=0;
-        arr.arr=new int[0];
+        arr.arr=new string[0];
         getline (ss,token,' ');
         string con_name=token;
     if (action=="MINIT"){
@@ -33,13 +35,13 @@ void Mactions(const string& file_name,const string& query) {
         getline(ss,token,' ');
         string val;
         getline(ss,val,' ');
-        arr.MINSERT(stoi(token),stoi(val));
+        arr.MINSERT(stoi(token),val);
         arr.MOUT(file_name,con_name);
         return;
     }
     if (action=="MPUSH") {
         getline(ss,token,' ');
-        arr.MPUSH(stoi(token));
+        arr.MPUSH(token);
         arr.MOUT(file_name,con_name);
         return;
     }  

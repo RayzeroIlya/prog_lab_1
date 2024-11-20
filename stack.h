@@ -12,10 +12,10 @@ struct Stack{
         Node<T>* newNode = new Node(_data);
         newNode->next=first;
         first=newNode;
-    return;
+        return;
     }
     T SPOP(){
-        if (first == nullptr) throw "Stack is empty";
+        if (first == nullptr) throw runtime_error("Stack is empty");
         Node<T>* fNode=first;
         T temp=fNode->data;
         first=first->next;
@@ -35,6 +35,7 @@ struct Stack{
                     stack->SPUSH(val);
                 }
                 fin.close();
+                stack->reverse();
                 return stack;
             }
         }
@@ -42,6 +43,7 @@ struct Stack{
         throw runtime_error("Stack doesnt exist"); 
     }
     void SOUT (const string& file_name, const string& con_name){
+        cout<< "here"<<endl;
         ifstream fin(file_name);
         ofstream fout(file_name+".tmp", ios_base::app);
         string row;
@@ -53,18 +55,36 @@ struct Stack{
             fout << row <<endl;
         }
         fout << con_name << " ";
-        Node<T>* cur = first;
-        while (cur){
-            fout << cur->data << " ";
-            cur=cur->next;
-        }
+       while(true){
+        try{fout << SPOP() << " ";}
+        catch(exception& ex){
         fout << endl;
         remove(file_name.c_str());
         rename((file_name+".tmp").c_str(), file_name.c_str());
+        return;
+        }
+       }
+       reverse();
     }
     Stack<T>* SINIT(const string& file_name, const string& con_name ){
-        ofstream fout (file_name, ios_base::app);
         Stack<T>* stack=new Stack<T>();
         return stack;
+    }
+
+
+    void reverse() { 
+        if (first == nullptr || first->next == nullptr) return;
+ 
+        Node<T>* prev = nullptr; 
+        Node<T>* curr = first; 
+        Node<T>* next = nullptr; 
+ 
+        while (curr != nullptr) { 
+            next = curr->next; 
+            curr->next = prev; 
+            prev = curr; 
+            curr = next; 
+        } 
+        first = prev; 
     }
 };

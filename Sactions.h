@@ -10,16 +10,12 @@ void Sactions(const string& file_name,const string& query) {
     string action;
     getline(ss,token,' ');
     action=token;
-        Stack<string>* stack;
-        getline (ss,token,' ');
-        string con_name=token;
+    Stack<string>* stack;
+    getline (ss,token,' ');
+    string con_name=token;
 
-
-
-    if (action=="SINIT"){
-        cout << token<< endl;
-        getline(ss,token,' ');
-        cout << token << endl;
+    if (action == "SINIT"){
+        cout << "WHIHIELEL";
         stack =stack->SINIT(file_name, con_name);
         stack->SOUT(file_name,con_name);
         return;
