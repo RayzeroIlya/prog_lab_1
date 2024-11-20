@@ -7,6 +7,11 @@ struct Queue{
     Node<T>* first;
     Node<T>* last;
     Queue<T>() : first(nullptr),last(nullptr){}
+    ~Queue() { 
+        while (first) { 
+            QPOP(); // Освобождаем память, удаляя все узлы 
+        } 
+    }
     T QPOP() {
         if (first==nullptr) throw runtime_error("Queue is empty");
         Node<T>* fNode=first;

@@ -38,7 +38,7 @@ int main(int argc, char** argv){
     if (action=="QINIT" || action == "QPUSH" 
     || action == "QPOP") Qactions(argv[2],token);
 
-    if (action == "HINIT" || action =="HINSERT" || action =="HGET"
+    if (action == "HINIT" || action =="HINSERT" || action =="HGET" 
     || action == "HREMOVE") HTactions(argv[2],token);
 
     if (action == "PRINT"){
@@ -54,7 +54,7 @@ int main(int argc, char** argv){
             fin.close();
             return 0;
         }
-        ifstream fin(argv[2]);
+        ifstream fin(argv[2]); 
         while(getline(fin,row)) cout << row << endl; 
         fin.close();
     }

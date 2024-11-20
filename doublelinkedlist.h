@@ -14,7 +14,11 @@ struct DLinkedList{
     DNode* tail;
 
     DLinkedList():head(nullptr),tail(nullptr){}
-
+    ~DLinkedList() { 
+        while (head) { 
+            DLDELHEAD(); 
+        } 
+    }
     void DLINSERT(const string& _data){
     DNode* newNode= new DNode(_data);
     if(head==nullptr){
