@@ -58,6 +58,8 @@ int main(int argc, char** argv){
         while(getline(fin,row)) cout << row << endl; 
         fin.close();
     }
+    
+
 
 
 

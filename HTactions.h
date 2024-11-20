@@ -41,7 +41,7 @@ void HTactions(const string& file_name,const string& query) {
     }
     if (action =="HGET"){
         getline(ss,token,' ');
-        cout << "Getted value -> " <<hTable.HGET(token)->value;
+        cout << "Getted value -> " <<hTable.HGET(token);
         return;
     }
 

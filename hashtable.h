@@ -17,45 +17,69 @@ struct HashTable {
     int size; 
  
     HashTable(int _size) : size(_size) { 
-        table = new HNode<Key, Value>*[size]; 
-        for (int i = 0; i < size; i++) { 
+        table = new HNode<Key, Value>*[_size]; 
+        for (int i = 0; i < _size; i++) { 
             table[i] = nullptr; 
         } 
     } 
  
-    // Хеш-функция (простая для демонстрации) 
-    int hash(const Key& key) { 
-        return stoi(key) % size; 
+    ~HashTable() { 
+        for (int i = 0; i < size; ++i) { 
+            HNode<Key, Value>* current = table[i]; 
+            while (current != nullptr) { 
+                HNode<Key, Value>* next = current->next; 
+                delete current; 
+                current = next; 
+            } 
+        } 
+        delete[] table; 
     } 
  
-    // Добавление элемента 
-    void HINSERT(const Key& key, const Value& value) {     
-        int index = hash(key); 
-        HNode<Key,Value>* newNode;
-        try{newNode =HGET(key);
-        cout << "Key exist"<<endl;
-            return;
-        }
-        catch (exception& ex) {
-        newNode = new HNode<Key, Value>(key, value); 
-        newNode->next = table[index]; 
-        table[index] = newNode; 
-        return;
-        }
 
+    int hash(const std::string& key) { 
+     int sum = 0; 
+     for (char c : key) { 
+       sum += c; 
+     } 
+    return std::abs(sum) % size; 
+    }    
+ 
+    // Добавление элемента 
+    void HINSERT(const Key& key, const Value& value) { 
+        int index = hash(key); 
+        HNode<Key, Value>* newNode = new HNode<Key, Value>(key, value); 
+        HNode<Key, Value>* current = table[index]; 
+        HNode<Key, Value>* prev = nullptr; 
+ 
+        while (current != nullptr) { 
+            if (current->key == key) { 
+                delete newNode; 
+                std::cerr << "Key already exists" << std::endl; 
+                return; 
+            } 
+            prev = current; 
+            current = current->next; 
+        } 
+ 
+        newNode->next = current; 
+        if (prev == nullptr) { 
+            table[index] = newNode; 
+        } else { 
+            prev->next = newNode; 
+        } 
     } 
  
     // Получение значения по ключу 
-    HNode<Key,Value>* HGET(const Key& key) { 
+    Value HGET(const Key& key) { 
         int index = hash(key); 
         HNode<Key, Value>* current = table[index]; 
         while (current != nullptr) { 
             if (current->key == key) { 
-                return current;
+                return current->value; 
             } 
             current = current->next; 
         } 
-        throw std::runtime_error("Key not found"); // Можно бросить исключение, если ключ не найден 
+        throw std::runtime_error("Key not found"); 
     } 
  
     // Удаление элемента по ключу 
@@ -77,23 +101,23 @@ struct HashTable {
             previous = current; 
             current = current->next; 
         } 
-        throw std::runtime_error("Key not found"); // Можно бросить исключение, если ключ не найден 
+        throw std::runtime_error("Key not found"); 
     } 
  
-    // Запись в файл 
-    void saveToFile(const std::string& filename) { 
+    // Запись в файл (без изменений) 
+    void saveToFile(const std::string& filename) const { 
         std::ofstream file(filename); 
         if (!file.is_open()) { 
             throw std::runtime_error("Cannot open file for writing"); 
         } 
-        file << size << std::endl; // Записываем размер таблицы 
+        file << size << std::endl; 
         for (int i = 0; i < size; i++) { 
             HNode<Key, Value>* current = table[i]; 
             while (current != nullptr) { 
                 file << current->key << " " << current->value << " "; 
                 current = current->next; 
-            }
-            file << endl; 
+            } 
+            file << std::endl; 
         } 
         file.close(); 
     } 
@@ -105,13 +129,19 @@ struct HashTable {
             throw std::runtime_error("Cannot open file for reading"); 
         } 
         int _size; 
-        file >> _size; // Читаем размер таблицы 
+        file >> _size; 
         if (_size != size) { 
             throw std::runtime_error("Table size mismatch"); 
         } 
-        // Очищаем таблицу 
+ 
+        // Правильное очищение таблицы: 
         for (int i = 0; i < size; i++) { 
-            delete table[i]; 
+            HNode<Key, Value>* current = table[i]; 
+            while (current != nullptr) { 
+                HNode<Key, Value>* next = current->next; 
+                delete current; 
+                current = next; 
+            } 
             table[i] = nullptr; 
         } 
  
@@ -119,7 +149,7 @@ struct HashTable {
         Value value; 
         while (file >> key >> value) { 
             HINSERT(key, value); 
-        } 
+        }
         file.close(); 
     } 
 };

@@ -62,9 +62,9 @@ struct Array{
         while (getline(fin,row)){
             stringstream ss(row);
             string val;
-            getline(ss,val,' ');
+            getline(ss,val,'\t');
             if( val== con_name) {
-                while (getline(ss,val,' ')) {
+                while (getline(ss,val,'\t')) {
                     MPUSH(val);
                  }
                  fin.close();
@@ -81,13 +81,13 @@ struct Array{
         while(getline(fin,row)){
                 string name;
                 stringstream ss(row);
-                getline(ss,name,' ');
+                getline(ss,name,'\t');
                 if (name==con_name) continue;
                 fout<<row<<endl;
         }
-        fout << con_name << " ";
+        fout << con_name << "\t";
         for (int i =0 ; i<size;i++) {
-            fout << arr[i] << " ";
+            fout << arr[i] << "\t";
         }
         fout << endl;
         remove(file_name.c_str());
